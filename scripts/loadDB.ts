@@ -81,7 +81,7 @@ const loadSampleData = async () => {
             console.log(response)
             const res = await collection.insertOne({
                 $vector: vector,
-                test: chunk
+                text: chunk
             })
 
             console.log(res)
