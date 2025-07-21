@@ -12,6 +12,15 @@ import { Message } from "ai"
 const Home = () => {
     const {append, isLoading, messages, input, handleInputChange, handleSubmit} = useChat()
     const noMessages = false
+
+    const handlePrompt = (promptText) => {
+        const msg: Message = {
+            id: crypto.randomUUID(),
+            content: promptText,
+            role: "user"
+        }
+        append(msg)
+    }
     return (
         <main suppressHydrationWarning={true}>
             <Image src={MoviesGPTLogo} width="250" alt="MoviesGPT Logo"/>
@@ -24,7 +33,7 @@ const Home = () => {
                             We hope you enjoy!
                         </p>
                         <br/>
-                        <PromptSuggestionsRow/>
+                        <PromptSuggestionsRow onPromptClick={handlePrompt}/>
                     </>
                 ) : (
                     <>
