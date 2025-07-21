@@ -7,12 +7,12 @@ import { useChat } from "ai/react"
 import { Message } from "ai"
 
 const Home = () => {
-
+    const {append, isLoading, messages, input, handleInputChange, handleSubmit} = useChat()
     const noMessages = true
     return (
         <main>
             <Image src={MoviesGPTLogo} width="250" alt="MoviesGPT Logo"/>
-            <section>
+            <section className={noMessages ? "": "populated"}>
                 {noMessages ? (
                     <>
                         <p className="starter-text">
@@ -21,7 +21,7 @@ const Home = () => {
                             We hope you enjoy!
                         </p>
                         <br/>
-                        {/* <PromptSuggestionRow/> */}
+                        {/* <PromptSuggestionsRow/> */}
                     </>
                 ) : (
                     <>
@@ -29,7 +29,17 @@ const Home = () => {
                         {/*<LoadingBubble/>*/}
                     </>
                 )}
+
             </section>
+            <form onSubmit={handleSubmit}>
+                <input
+                    className="question-box"
+                    onChange={handleInputChange}
+                    value={input}
+                    placeholder="Ask me something..."
+                />
+                <input type="submit"/>
+            </form>
         </main>
     )
 }
