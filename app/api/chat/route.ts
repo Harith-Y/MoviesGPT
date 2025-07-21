@@ -1,4 +1,5 @@
 import OpenAI from "openai"
+import { OpenAIStream, StreamingTextResponse} from 'ai'
 
 import {DataAPIClient} from "@datastax/astra-db-ts";
 
@@ -65,7 +66,7 @@ export async function POST(req: Request) {
             content: `You are an AI assistant who knows everything about Movies.
             Use the below context to augment what you know about Movies.
             The context will provide you with the most recent page data from wikipedia.
-            If the context doesn't include the information you need answer absed on your
+            If the context doesn't include the information you need answer based on your
             existing knowledge and don't mention the source of your information or
             what the context does or doesn't include.
             Format responses using markdown where applicable and don't return
@@ -80,29 +81,16 @@ export async function POST(req: Request) {
         `
         }
 
-        const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-            method: "POST",
-            headers: {
-              "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              model: "deepseek/deepseek-v3-base:free",
-              messages: [template, ...messages],
-              stream: true,
-            }),
-          });
-        
-          // Return the streaming response directly
-          return new Response(response.body, {
-            headers: {
-              "Content-Type": "text/event-stream", // or "application/json" if chunked JSON
-              "Cache-Control": "no-cache",
-              "Connection": "keep-alive",
-            },
-          });
-    
-        } catch (err) {
+        const response = await chatClient.chat.completions.create({
+            model: "deepseek/deepseek-chat",
+            messages: [template, ...messages],
+            stream: true
+        });
+
+        const stream = OpenAIStream(response)
+        return new StreamingTextResponse(stream)
+
+    } catch (err) {
         throw err
     }
 }
