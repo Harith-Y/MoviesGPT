@@ -11,7 +11,7 @@ import { Message } from "ai"
 
 const Home = () => {
     const {append, isLoading, messages, input, handleInputChange, handleSubmit} = useChat()
-    const noMessages = false
+    const noMessages = !messages || messages.length === 0
 
     const handlePrompt = (promptText) => {
         const msg: Message = {

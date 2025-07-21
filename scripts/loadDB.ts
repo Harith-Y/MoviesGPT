@@ -18,7 +18,7 @@ const {
     ASTRA_DB_APPLICATION_TOKEN,
     OPENROUTER_API_KEY,
     NVIDIA_API_KEY
-     } = process.env
+ } = process.env
 
 const embedClient = new OpenAI({
     baseURL: "https://integrate.api.nvidia.com/v1",
