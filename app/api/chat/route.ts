@@ -45,7 +45,7 @@ export async function POST(req: Request) {
         })
 
         try {
-            const collection = await database.collection(ASTRA_DB_COLLECTION)
+            const collection = await database.collection(ASTRA_DB_COLLECTION, {keyspace: ASTRA_DB_NAMESPACE})
             const cursor = collection.find(null, {
                 sort: {
                     $vector: embedding.data[0].embedding,
@@ -58,6 +58,7 @@ export async function POST(req: Request) {
             docContext = JSON.stringify(docsMap)
 
         } catch (error) {
+            console.log(error)
             console.log("Error querying db...")
         }
 
@@ -86,8 +87,9 @@ export async function POST(req: Request) {
             messages: [template, ...messages],
             stream: true
         });
-
-        const stream = OpenAIStream(response)
+        
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const stream = OpenAIStream(response as any);
         return new StreamingTextResponse(stream)
 
     } catch (err) {
