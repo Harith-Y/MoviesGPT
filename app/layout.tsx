@@ -9,9 +9,7 @@ export const metadata:Metadata = {
 const RootLayout = ({ children }) => {
     return (
         <html lang="en">
-            <head>
-                <title>MoviesGPT</title>
-            </head>
+            <head></head>
             <body>{children}</body>
         </html>
     )
