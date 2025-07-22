@@ -1,7 +1,7 @@
 # MoviesGPT
 
 MoviesGPT is an AI-powered assistant that knows everything about movies! Ask it anything about the latest movies, and it will answer using up-to-date information from Wikipedia and its own knowledge base.
-
+#### Refer the [Blog](https://medium.com/@yharith16/rag-chatbot-4fe7081770f0)
 ## Features
 - Chat with an AI that specializes in movies
 - Uses the latest Wikipedia data for movie information
