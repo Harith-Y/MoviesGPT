@@ -1,40 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# MoviesGPT
+
+MoviesGPT is an AI-powered assistant that knows everything about movies! Ask it anything about the latest movies, and it will answer using up-to-date information from Wikipedia and its own knowledge base.
+
+## Features
+- Chat with an AI that specializes in movies
+- Uses the latest Wikipedia data for movie information
+- Supports multiple Indian languages and film industries
+- Fast, streaming responses
+
+## How It Works
+- Scrapes Wikipedia pages for the latest movie lists
+- Splits and embeds the content using NVIDIA's embedding model
+- Stores and retrieves data from AstraDB
+- Answers your questions using OpenRouter's chat models, augmented with the latest context
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js (v18 or higher recommended)
+- npm or yarn
+- AstraDB account and API credentials
+- NVIDIA and OpenRouter API keys
 
+### Installation
+1. Clone this repository:
+   ```bash
+   git clone <repo-url>
+   cd nextjs-moviesgpt
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+3. Create a `.env` file in the root directory and add the following variables:
+   ```env
+   ASTRA_DB_NAMESPACE=your_namespace
+   ASTRA_DB_COLLECTION=your_collection
+   ASTRA_DB_API_ENDPOINT=your_db_endpoint
+   ASTRA_DB_APPLICATION_TOKEN=your_db_token
+   OPENROUTER_API_KEY=your_openrouter_key
+   NVIDIA_API_KEY=your_nvidia_key
+   ```
+
+### Load Movie Data
+To scrape and load the latest movie data into your database, run:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run seed
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Start the App
+To start the Next.js app:
+```bash
+npm run dev
+```
+Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Usage
+- Type your movie-related question in the chat box and get instant answers!
+- Try prompts like:
+  - "What are the latest Hindi movies?"
+  - "List upcoming Tamil films in 2025."
+  - "Who starred in the latest Bengali movies?"
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+## Contributing
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
