@@ -48,8 +48,9 @@ const Home = () => {
                     onChange={handleInputChange}
                     value={input}
                     placeholder="Ask me something..."
+                    disabled={isLoading}
                 />
-                <input type="submit"/>
+                <input type="submit" disabled={isLoading}/>
             </form>
         </main>
     )
